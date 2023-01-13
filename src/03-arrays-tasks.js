@@ -496,8 +496,8 @@ function getIntervalArray(/* start, end */) {
  *   [ 'a', 'a', 'a', 'a' ]  => [ 'a' ]
  *   [ 1, 1, 2, 2, 3, 3, 4, 4] => [ 1, 2, 3, 4]
  */
-function distinct(/* arr */) {
-  throw new Error('Not implemented');
+function distinct(arr) {
+  return arr.filter((el, index) => arr.indexOf(el) === index);
 }
 
 /**
@@ -530,8 +530,18 @@ function distinct(/* arr */) {
  *    "Poland" => ["Lodz"]
  *   }
  */
-function group(/* array, keySelector, valueSelector */) {
-  throw new Error('Not implemented');
+function group(array, keySelector, valueSelector) {
+  const map = new Map();
+  array.map((element) => {
+    const key = keySelector(element);
+    const value = valueSelector(element);
+    if (!map.has(key)) {
+      map.set(key, []);
+    }
+    map.get(key).push(value);
+    return true;
+  });
+  return map;
 }
 
 
@@ -548,8 +558,8 @@ function group(/* array, keySelector, valueSelector */) {
  *   [[1, 2], [3, 4], [5, 6]], (x) => x     =>   [ 1, 2, 3, 4, 5, 6 ]
  *   ['one','two','three'], (x) => x.split('')  =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
-function selectMany(/* arr, childrenSelector */) {
-  throw new Error('Not implemented');
+function selectMany(arr, childrenSelector) {
+  return arr.map(childrenSelector).flat();
 }
 
 
@@ -565,8 +575,13 @@ function selectMany(/* arr, childrenSelector */) {
  *   ['one','two','three'], [2]       => 'three'  (arr[2])
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
-function getElementByIndexes(/* arr, indexes */) {
-  throw new Error('Not implemented');
+function getElementByIndexes(arr, indexes) {
+  let newArr = arr;
+  indexes.map((i) => {
+    newArr = newArr[i];
+    return true;
+  });
+  return newArr;
 }
 
 
@@ -588,8 +603,15 @@ function getElementByIndexes(/* arr, indexes */) {
  *   [ 1, 2, 3, 4, 5, 6, 7, 8 ]   =>  [ 5, 6, 7, 8, 1, 2, 3, 4 ]
  *
  */
-function swapHeadAndTail(/* arr */) {
-  throw new Error('Not implemented');
+function swapHeadAndTail(arr) {
+  const firstChunk = arr.slice(0, Math.floor(arr.length / 2));
+  const lastChunk = arr.slice(Math.ceil(arr.length / 2));
+  const center = arr[Math.floor(arr.length / 2)];
+  if (arr.length % 2 === 0) {
+    return [...lastChunk, ...firstChunk];
+  }
+
+  return [...lastChunk, center, ...firstChunk];
 }
 
 
