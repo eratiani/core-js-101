@@ -104,7 +104,7 @@ function angleBetweenClockHands(date) {
   const minutes = time.getUTCMinutes();
   const hourAngle = (hours + minutes / 60) * 30;
   const minuteAngle = minutes * 6;
-  const angle = Math.abs(hourAngle - minuteAngle);
+  let angle = Math.abs(hourAngle - minuteAngle);
   if (angle > 180) angle -= 180;
   return angle * (Math.PI / 180);
 }

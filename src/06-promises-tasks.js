@@ -98,17 +98,15 @@ function getFastestPromise(array) {
  *    });
  *
  */
-function chainPromises( array, action ) {
+function chainPromises(array, action) {
   let result;
-  return array.reduce((promise, item) => {
-    return promise.then(
-      (res) => {
-        result = res;
-        return item;
-      },
-      () => item
-    ).then(action.bind(null, result));
-  }, Promise.resolve())
+  return array.reduce((promise, item) => promise.then(
+    (res) => {
+      result = res;
+      return item;
+    },
+    () => item,
+  ).then(action.bind(null, result)), Promise.resolve());
 }
 
 module.exports = {
