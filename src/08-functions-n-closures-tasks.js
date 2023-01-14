@@ -65,14 +65,14 @@ function getPowerFunction(exponent) {
 function getPolynom(...arg) {
   if (arg.length === 0) {
     return null;
-}
-return (x) => {
+  }
+  return (x) => {
     let result = 0;
     for (let i = 0; i < arg.length; i += 1) {
-        result += coefficients[i] * (x ** (coefficients.length - 1 - i));
+      result += arg[i] * (x ** (arg.length - 1 - i));
     }
     return result;
-}
+  };
 }
 
 
@@ -115,15 +115,16 @@ function memoize(func) {
  * retryer() => 2
  */
 function retry(func, attempts) {
-  return function() {
-    for (let i = 0; i < attempts; i++) {
+  // eslint-disable-next-line consistent-return
+  return function () {
+    for (let i = 0; i < attempts; i += 1) {
       try {
         return func();
       } catch (error) {
         if (i === attempts - 1) throw error;
       }
     }
-  }
+  };
 }
 
 

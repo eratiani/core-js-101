@@ -161,13 +161,12 @@ function doRectanglesOverlap(rect1, rect2) {
  *   { center: { x:0, y:0 }, radius:10 },  { x:10, y:10 }   => false
  *
  */
-function isInsideCircle( circle, point ) {
-  const distance = Math.sqrt((point.x - circle.center.x) ** 2 + (point.y - circle.center.y)** 2);
+function isInsideCircle(circle, point) {
+  const distance = Math.sqrt((point.x - circle.center.x) ** 2 + (point.y - circle.center.y) ** 2);
   if (distance < circle.radius) {
     return true;
-  } else {
-    return false;
   }
+  return false;
 }
 
 
@@ -218,28 +217,28 @@ function findFirstSingleChar(str) {
  *   5, 3, true, true   => '[3, 5]'
  *
  */
-function getIntervalString( a, b, isStartIncluded, isEndIncluded ) {
+function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
   const newArr = [];
   if (isStartIncluded) {
-    newArr.unshift("[");
+    newArr.unshift('[');
   } else {
-    newArr.unshift("(");
+    newArr.unshift('(');
   }
-  if (a > b) {
+  if (a < b) {
     newArr.push(a);
-    newArr.push(",");
+    newArr.push(', ');
     newArr.push(b);
   } else {
     newArr.push(b);
-    newArr.push(",");
+    newArr.push(', ');
     newArr.push(a);
   }
   if (isEndIncluded) {
-    newArr.push("]");
+    newArr.push(']');
   } else {
-    newArr.push(")");
+    newArr.push(')');
   }
-  return newArr.join("");
+  return newArr.join('');
 }
 
 
@@ -297,16 +296,16 @@ function reverseInteger(num) {
  *   5436468789016589 => false
  *   4916123456789012 => false
  */
-function isCreditCardNumber( ccn ) {
-    const digits = ccn.toString().split("").map(Number);
-    for (let i = digits.length - 2; i >= 0; i -= 2) {
-        digits[i] *= 2;
-        if (digits[i] > 9) {
-            digits[i] -= 9;
-        }
+function isCreditCardNumber(ccn) {
+  const digits = ccn.toString().split('').map(Number);
+  for (let i = digits.length - 2; i >= 0; i -= 2) {
+    digits[i] *= 2;
+    if (digits[i] > 9) {
+      digits[i] -= 9;
     }
-    const sum = digits.reduce((a, b) => a + b);
-    return sum % 10 === 0;
+  }
+  const sum = digits.reduce((a, b) => a + b);
+  return sum % 10 === 0;
 }
 
 /**
@@ -358,19 +357,19 @@ function getDigitalRoot(num) {
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
  */
-function isBracketsBalanced( str ) {
-  const arrOfBrackets = ['[]', '()', '{}', '<>']
+function isBracketsBalanced(str) {
+  const arrOfBrackets = ['[]', '()', '{}', '<>'];
   return arrOfBrackets.map((bracket, i) => {
     if (str.includes(bracket)) {
-      str = str.replace(bracket,"");
-       isBracketsBalanced( str );
-    } else if(i === arrOfBrackets.length - 1 && str !="") {
+      // eslint-disable-next-line no-param-reassign
+      str = str.replace(bracket, '');
+      isBracketsBalanced(str);
+    } else if (i === str.length - 1 && str !== '') {
       return false;
     }
     return true;
-  })[3]; 
-  
-  }
+  })[arrOfBrackets.length - 1];
+}
 
 
 /**
