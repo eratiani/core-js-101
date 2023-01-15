@@ -151,9 +151,16 @@ function retry(func, attempts) {
  * cos(3.141592653589793) ends
  *
  */
-function logger(/* func, logFunc */) {
-  throw new Error('Not implemented');
+function logger( func, logFunc ) {
+  return (...arguments) => {
+    console.log(Math.cos(Math.PI));
+    logFunc(`${func.name}(${arguments.join(",")}) starts`);
+    const result = func(...arguments);
+    logFunc(`${func.name}(${arguments.join(",")}) ends`);
+    return result;
+  }
 }
+
 
 
 /**

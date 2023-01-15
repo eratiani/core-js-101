@@ -411,7 +411,7 @@ function toNaryString(num, n) {
  */
 function getCommonDirectoryPath( pathes ) {
   const pathArr = pathes.map(e => e.split('/'));
-  const index = pathArr[0].findIndex((e, i) => pathArr.some((el) => e !== el[i]));
+  const index = pathArr[0].findIndex((elem, i) => pathArr.some((el) => elem !== el[i]));
   return index === 0 ? '' : `${pathArr[0].slice(0, index).join('/')}/`;
 }
 
