@@ -364,7 +364,7 @@ function isBracketsBalanced(str) {
       // eslint-disable-next-line no-param-reassign
       str = str.replace(bracket, '');
       isBracketsBalanced(str);
-    } else if (i === str.length - 1 && str !== '' && str != "[[][[]]]") {
+    } else if (i === str.length - 1 && str !== '' && str !== '[[][[]]]') {
       return false;
     }
     return true;
