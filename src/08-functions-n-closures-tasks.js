@@ -116,7 +116,7 @@ function memoize(func) {
  */
 function retry(func, attempts) {
   // eslint-disable-next-line consistent-return
-  return function () {
+  return () => {
     for (let i = 0; i < attempts; i += 1) {
       try {
         return func();
