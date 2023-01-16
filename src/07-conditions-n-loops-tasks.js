@@ -493,7 +493,7 @@ function evaluateTicTacToePosition(position) {
     if (position[0][0] === position[1][1] && position[0][0] === position[2][2]) {
       winner = position[0][0];
     }
-    if (position[0][2] === position[1][2] && position[0][2] === position[2][2]) {
+    if (position[0][2] === position[1][1] && position[0][2] === position[2][0]) {
       winner = position[0][2];
     }
   }
