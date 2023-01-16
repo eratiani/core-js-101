@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 /* *************************************************************************************************
  *                                                                                                *
  * Please read the following tutorial before implementing tasks:                                   *
@@ -409,8 +410,8 @@ function toNaryString(num, n) {
  *   ['/web/assets/style.css', '/.bin/mocha',  '/read.me'] => '/'
  *   ['/web/favicon.ico', '/web-scripts/dump', '/verbalizer/logs'] => '/'
  */
-function getCommonDirectoryPath( pathes ) {
-  const pathArr = pathes.map(e => e.split('/'));
+function getCommonDirectoryPath(pathes) {
+  const pathArr = pathes.map((e) => e.split('/'));
   const index = pathArr[0].findIndex((elem, i) => pathArr.some((el) => elem !== el[i]));
   return index === 0 ? '' : `${pathArr[0].slice(0, index).join('/')}/`;
 }
@@ -434,17 +435,17 @@ function getCommonDirectoryPath( pathes ) {
  *                         [ 6 ]]
  *
  */
-function getMatrixProduct( m1, m2 ) {
-  let answer = [];
+function getMatrixProduct(m1, m2) {
+  const answer = [];
   for (let i = 0; i < m1.length; i += 1) {
-      answer[i] = [];
-      for (let j = 0; j < m2[0].length; j += 1) {
-          let sum = 0;
-          for (let k = 0; k < m1[0].length; k += 1) {
-              sum += m1[i][k] * m2[k][j];
-          }
-          answer[i][j] = sum;
+    answer[i] = [];
+    for (let j = 0; j < m2[0].length; j += 1) {
+      let sum = 0;
+      for (let k = 0; k < m1[0].length; k += 1) {
+        sum += m1[i][k] * m2[k][j];
       }
+      answer[i][j] = sum;
+    }
   }
   return answer;
 }
@@ -480,20 +481,20 @@ function getMatrixProduct( m1, m2 ) {
  *    [    ,   ,    ]]
  *
  */
-function evaluateTicTacToePosition( position ) {
+function evaluateTicTacToePosition(position) {
   let winner;
   for (let i = 0; i < position.length; i += 1) {
     if (position[i][0] === position[i][1] && position[i][0] === position[i][2]) {
-      winner = position[i][0]
+      winner = position[i][0];
     }
     if (position[0][i] === position[1][i] && position[0][i] === position[2][i]) {
       winner = position[0][i];
     }
     if (position[0][0] === position[1][1] && position[0][0] === position[2][2]) {
-      winner = position[0][0]
+      winner = position[0][0];
     }
     if (position[0][2] === position[1][2] && position[0][2] === position[2][2]) {
-      winner = position[0][2]
+      winner = position[0][2];
     }
   }
   return winner;

@@ -151,16 +151,15 @@ function retry(func, attempts) {
  * cos(3.141592653589793) ends
  *
  */
-function logger( func, logFunc ) {
-  return (...arguments) => {
-    console.log(Math.cos(Math.PI));
-    logFunc(`${func.name}(${arguments.join(",")}) starts`);
-    const result = func(...arguments);
-    logFunc(`${func.name}(${arguments.join(",")}) ends`);
+function logger(func, logFunc) {
+  return (...args) => {
+    const argsText = args.map((arg) => JSON.stringify(arg));
+    logFunc(`${func.name}(${argsText}) starts`);
+    const result = func(...args);
+    logFunc(`${func.name}(${argsText}) ends`);
     return result;
-  }
+  };
 }
-
 
 
 /**
@@ -176,11 +175,12 @@ function logger( func, logFunc ) {
  *   partialUsingArguments(fn, 'a','b','c')('d') => 'abcd'
  *   partialUsingArguments(fn, 'a','b','c','d')() => 'abcd'
  */
-function partialUsingArguments( fn, ...args1 ) {
+function partialUsingArguments(fn, ...args1) {
+  let result;
   return (...args) => {
-   result = fn(...args1, ...args)
-   return result;
-  }
+    result = fn(...args1, ...args);
+    return result;
+  };
 }
 
 
@@ -201,11 +201,16 @@ function partialUsingArguments( fn, ...args1 ) {
  *   getId4() => 7
  *   getId10() => 11
  */
-function getIdGeneratorFunction( startFrom ) {
+function getIdGeneratorFunction(startFrom) {
   let result = startFrom;
+  // eslint-disable-next-line no-return-assign
   return () => {
-   return result += 1;
-  }
+    const tempId = result;
+
+    result += 1;
+
+    return tempId;
+  };
 }
 
 
