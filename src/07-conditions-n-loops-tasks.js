@@ -361,14 +361,14 @@ function getDigitalRoot(num) {
 function isBracketsBalanced(str) {
   let str1 = str;
   const regex = /\[\]|\(\)|{}|<>/g;
+  // eslint-disable-next-line func-names
   return (function () {
     if (regex.test(str1)) {
       str1 = str1.replace(regex, '');
       return isBracketsBalanced(str1);
-    } else {
-      return str1.length === 0;
     }
-  })();
+    return str1.length === 0;
+  }());
 }
 
 
